@@ -168,16 +168,10 @@ select.inp{cursor:pointer}
 </style>
   <!-- Supabase config loaded securely from Netlify function -->
   <script>
-// Load Supabase config from Cloudflare function
-(async function() {
-  try {
-    const r = await fetch('/functions/config');
-    const js = await r.text();
-    eval(js);
-  } catch(e) {
-    console.warn('Config load failed:', e);
-  }
-})();
+// ── SUPABASE CONFIG — paste your values here ──────────────────
+window.SUPABASE_URL      = 'https://cdzuhymhebsbjqewheyc.supabase.co';
+window.SUPABASE_ANON_KEY = 'sb_publishable_XySE2OgcRQ7pahFNn8boxA_bF6NCDE7';
+// ──────────────────────────────────────────────────────────────
 </script>
 </head>
 <body>
@@ -3219,13 +3213,8 @@ const getSavedReg = () => { try { return JSON.parse(localStorage.getItem('injaz_
 const getApplied  = () => JSON.parse(localStorage.getItem('injaz_apps_'+(currentUser?.id||'')) || '[]');
 
 
-// Wait for Supabase config to load, then init
-(async function() {
-  // Give the config fetch a moment to complete
-  await new Promise(r => setTimeout(r, 800));
-  restoreSession();
-  syncFormResponses().then(() => { renderNav(); renderMain(); });
-})();
+restoreSession();
+syncFormResponses().then(() => { renderNav(); renderMain(); });
 </script>
 </body>
 </html>
